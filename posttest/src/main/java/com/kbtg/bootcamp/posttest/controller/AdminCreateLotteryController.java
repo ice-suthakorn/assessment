@@ -1,6 +1,7 @@
 package com.kbtg.bootcamp.posttest.controller;
 
 import com.kbtg.bootcamp.posttest.orderLottery.LotteryRequest;
+import com.kbtg.bootcamp.posttest.response.AdminLotteryResponse;
 import com.kbtg.bootcamp.posttest.service.LotteryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,7 +19,7 @@ public class AdminCreateLotteryController {
         this.lotteryService = lotteryService;
     }
     @PostMapping("")
-    public String createLottery(@Validated @RequestBody LotteryRequest request){
+    public AdminLotteryResponse createLottery(@Validated @RequestBody LotteryRequest request){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return lotteryService.createLottery(request);
     }

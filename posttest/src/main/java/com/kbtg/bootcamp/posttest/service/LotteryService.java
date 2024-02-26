@@ -3,6 +3,7 @@ package com.kbtg.bootcamp.posttest.service;
 import com.kbtg.bootcamp.posttest.orderLottery.Lottery;
 import com.kbtg.bootcamp.posttest.orderLottery.LotteryRepository;
 import com.kbtg.bootcamp.posttest.orderLottery.LotteryRequest;
+import com.kbtg.bootcamp.posttest.response.AdminLotteryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +18,16 @@ public class LotteryService {
         this.lotteryRepository = lotteryRepository;
     }
 
-    public String createLottery(LotteryRequest request){
+    public AdminLotteryResponse createLottery(LotteryRequest request){
         Lottery lottery = new Lottery();
         lottery.setTicket(request.ticket());
         lottery.setPrice(request.price());
         lottery.setAmount(request.amount());
         lotteryRepository.save(lottery);
 
-        return lottery.getTicket();
+        AdminLotteryResponse adminLotteryResponse = new AdminLotteryResponse();
+        adminLotteryResponse.setTicket(lottery.getTicket());
+        return adminLotteryResponse;
     }
 
     public List<String> getByTicketLottery(){
